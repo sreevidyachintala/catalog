@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}Category{% endblock title %}
+{% include "nav.html" %}
+{% block content %}
+{% include "flash.html" %}
+
+<!-- Page Content -->
+<div class="container-fluid" >
+  <section id="showcategories" class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <p class="h2"> Categories 
+          </p>
+          <ul class="list-group">
+
+            {% for i in categories %}
+              <li class="list-group-item">
+              <p class="h3">
+              <a href="{{url_for('showcategories', category_id = i.id,) }}" >{{ i.name }}</a>
+        
+              {% if 'name' in session %}
+              <a href = "{{url_for('deleteCategory', category_id = i.id)}}">
+                <i class="fa fa-trash" style="font-size:30px;color:red">
+                <span class="glyphicon  pull-right" data-toggle="tooltip" title="Delete Category"></span></i></a>
+
+              <a href = "{{url_for('editCategory', category_id = i.id)}}">
+                <i class="fa fa-pencil" style="font-size:30px;color:green">
+                <span class="glyphicon  pull-right"data-toggle="tooltip" title="Edit Category"></span></i></a>
+                {% endif %}
+               </p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!--Items--->
+        <div class="col-md-8">
+          <p class="h2">ITEMS
+          </p>
+          <table class="table table-bordered" style="color: orange;background-color:#FFF;">
+            <tr class="bg-primary"><td>Brand</td>
+              <td>Image_View</td>
+              <td>Info</td></tr>
+            {% for i in items %}
+              <tr>
+                <td><a href="{{url_for('items',item_id=i.id)}}"><h3 class="">{{ i.brandname }}</h3></a></td>
+                <td style="width: 500px;ali"><img class="img-fluid img-responsive" src="{{ i.image }}" alt="Card image"  style="height: 200px;width: 50%;"></td>
+                <td>
+                  <button type="button" class="btn btn-info" data-toggle="collapse"  title="Click More Details" data-target="#demo{{ i.id }}">Details</button>
+                  
+                  <div id="demo{{ i.id }}" class="collapse col-sm-4" style="position: absolute; z-index: 1;background:#CCEEFF;padding: 5px;box-shadow: 0px 0px 4px #FF334F;">
+                    <p class="h4">Model : {{i.model}}</p>                   
+                    <p class="h4">Color : {{i.color}}</p>
+                    <p class="h4">Price : {{i.price}}</p>
+                    <p class="h4">Description : {{ i.description }}</p>
+                  </div>
+                </td>
+                <td>
+                   {% if 'name' in session %}
+                    <a href = "{{url_for('deleteItem', category_id = i.category_id, item_id = i.id)}}"  >
+                     <i class="fa fa-trash" style="font-size:25px;color:red">
+                     <span class="glyphicon  pull-right" data-toggle="tooltip" ></span></i></a>
+                     <a href = "{{url_for('editItem', category_id = i.category.id, item_id = i.id)}}">
+                    <i class="fa fa-edit" style="font-size:25px;color:green">
+                    <span class="glyphicon pull-right" data-toggle="tooltip" title="Edit Item"></span></i></a>
+                  {% endif %}
+                </td>
+                  
+              </tr>
+              
+                  
+
+            {% endfor %}
+
+          </table>
+          
+        </div>
+     </div><!-- /.row -->
+    </div> <!-- /.container -->
+   </section>  <!-- /.section -->
+   </div> <!-- /.container-fluid --> 
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+

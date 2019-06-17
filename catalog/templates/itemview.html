@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Category{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+{% include "flash.html" %}
+<!-- Page Content -->
+<div class="">
+  <div class="row">
+     <div class="md-8">
+      <p style="width: 800px;"><br><br>
+      <div style="background-color:lightgreen">
+      <div class="panel-body" align="center">
+      <img class="img-responsive" src="{{ item.image }}" alt="{{ item.name }}" style="height: 395px;">
+      <p class="h4">Brand : {{item.brandname}}</p>
+      <p class="h4">Model : {{item.model}}</p>                   
+      <p class="h4">Color : {{item.color}}</p>
+      <p class="h4">Price : {{item.price}}</p>
+      <p class="h4">Description : {{ item.description }}</p>
+      </div>
+    </div>
+      </p>
+     </div>
+  </div>
+</div>
+{% endblock %}
